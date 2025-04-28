@@ -1,17 +1,15 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const PORT = 3000;
 
+app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.set('view engine', 'ejs');
 
 let entries = [
-    
     {
         name: "Mouaz Tabboush",
-        message: "...waren sie schonmal im Baden-Württemberg?",
+        message: "waren sie schonmal im Baden-Württemberg?",
         date: "2025-01-01"
     },
     {
@@ -23,7 +21,7 @@ let entries = [
         name: "Mouaz Tabboush",
         message: "Nett hier.",
         date: "2025-01-01"
-    }    
+    }
 ];
 
 // GET: Alle Einträge abrufen (API)
@@ -42,11 +40,6 @@ app.post('/entries', (req, res) => {
   res.status(201).json(entry);
 });
 
-// Frontend über EJS
-app.get('/', (req, res) => {
-  res.render('index');
-});
-
 app.listen(PORT, () => {
-  console.log(`Server läuft auf http://localhost:${PORT}`);
+  console.log(`Backend läuft auf http://localhost:${PORT}`);
 }); 

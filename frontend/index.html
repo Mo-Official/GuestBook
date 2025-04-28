@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Gastbuch</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="card">
+    <h1>Gastbuch</h1>
+    <form id="entryForm" autocomplete="off">
+      <input name="name" placeholder="Dein Name" required>
+      <textarea name="message" placeholder="Deine Nachricht" required></textarea>
+      <button>Absenden</button>
+    </form>
+    <ul id="entries" class="entries-list"></ul>
+  </div>
+  <script>
+    const API_URL = 'http://localhost:3000/entries';
+
+    async function loadEntries() {
+      const res = await fetch(API_URL);
+      const entries = await res.json();
+      document.getElementById('entries').innerHTML = entries.map(e =>
+        `<li class="entry">
+          <span class="entry-name">${e.name}</span>
+          <span class="entry-date">${new Date(e.date).toLocaleString('de-DE')}</span>
+          <div class="entry-message">${e.message.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
+        </li>`
+      ).reverse().join('');
+    }
+    document.getElementById('entryForm').onsubmit = async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      await fetch(API_URL, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          name: form.name.value,
+          message: form.message.value
+        })
+      });
+      form.reset();
+      loadEntries();
+    };
+    loadEntries();
+  </script>
+</body>
+</html> 
