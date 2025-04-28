@@ -12,3 +12,5 @@ Thumbs.db
 
 # Env files
 .env 
+
+docker-compose.yml

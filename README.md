@@ -5,6 +5,7 @@
 Dies ist eine minimale Node.js-Anwendung für ein einfaches Gästebuch.  
 Einträge werden im Arbeitsspeicher (RAM) gespeichert und gehen beim Neustart des Servers verloren.
 
+**Dieses Projekt wurde im Rahmen der Vorlesung "Web Engineering" an der DHBW erstellt.**
 
 ## Projektstruktur
 
@@ -15,7 +16,19 @@ Das Projekt ist in zwei Teile aufgeteilt:
 
 ## Installation & Start
 
-### Backend
+### Mit Docker (empfohlen)
+
+1. Docker und Docker Compose installieren
+2. Im Projektverzeichnis ausführen:
+   ```bash
+   docker-compose up --build
+   ```
+3. Anwendung im Browser öffnen:  
+   [http://localhost](http://localhost)
+
+### Manuell
+
+#### Backend
 
 1. In den Backend-Ordner wechseln:
    ```bash
@@ -32,7 +45,7 @@ Das Projekt ist in zwei Teile aufgeteilt:
    npm run dev
    ```
 
-### Frontend
+#### Frontend
 
 1. In den Frontend-Ordner wechseln:
    ```bash
@@ -46,3 +59,15 @@ Das Projekt ist in zwei Teile aufgeteilt:
 
 3. Anwendung im Browser öffnen:  
    [http://localhost:3000](http://localhost:3000)
+
+## Hinweise
+
+- Die Einträge werden nur im RAM gespeichert und sind nach einem Neustart verloren.
+- Das Frontend kommuniziert mit dem Backend über die API unter `http://localhost:3000/entries`.
+- Für das Styling wird reines CSS verwendet.
+
+## Features
+
+- Einträge hinzufügen (Name und Nachricht)
+- Alle Einträge anzeigen (inkl. Datum)
+- Einfaches, modernes Frontend mit EJS und CSS
